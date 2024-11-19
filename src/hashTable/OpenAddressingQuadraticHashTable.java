@@ -1,12 +1,12 @@
 package hashTable;
 
-public class QuadraticHashTableOpenAddressing {
+public class OpenAddressingQuadraticHashTable {
     private Integer[] table;
     private int size;
     private int collisions;
     private int rehashCount;
 
-    public QuadraticHashTableOpenAddressing(int capacity) {
+    public OpenAddressingQuadraticHashTable(int capacity) {
         table = new Integer[capacity];
         size = 0;
         collisions = 0;

@@ -2,14 +2,14 @@ package hashTable;
 
 import java.util.LinkedList;
 
-public class HTClosedAddressing {
+public class ClosedAddressingHashTable {
     private LinkedList<Integer>[] table;
     private int size;
     private int collisions;
     private final double loadFactorLimit = 0.75;  // Limite do fator de carga
 
     @SuppressWarnings("unchecked")
-    public HTClosedAddressing(int capacity) {
+    public ClosedAddressingHashTable(int capacity) {
         table = new LinkedList[capacity];
         for (int i = 0; i < capacity; i++) {
             table[i] = new LinkedList<>();

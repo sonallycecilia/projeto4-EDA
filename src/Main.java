@@ -20,12 +20,12 @@ public class Main {
         int[] database, busca;
         int fatorDeCarga, encontrados = 0;
 
-        database = lerArquivo("desordenados-300_000", 300_000);
-        busca = lerArquivo("desordenados-300_000", 500_000);
+        database = lerArquivo("lista_unica", 300_000);
+        busca = lerArquivo("lista_repetida", 500_000);
         fatorDeCarga = (int) Math.ceil((double) database.length / 12);
 
         //endereçamento fechado
-        HTClosedAddressing closedHashTable = new HTClosedAddressing(fatorDeCarga);
+        ClosedAddressingHashTable closedHashTable = new ClosedAddressingHashTable(fatorDeCarga);
         for (int i = 0; i < database.length; i++) {closedHashTable.insert(database[i]);}
         for (int i = 0; i < busca.length; i++){ 
             if(closedHashTable.search(busca[i])){encontrados++;}
@@ -42,7 +42,7 @@ public class Main {
         encontrados = 0;
 
         //endereçamento aberto (linear)
-        HTOpenAddressingLinearProbing linearHashTable = new HTOpenAddressingLinearProbing(database.length);
+        OpenAddressingLinearHashTable linearHashTable = new OpenAddressingLinearHashTable(database.length);
         for(int i = 0; i < database.length; i++){linearHashTable.insert(database[i]);}
         for (int i = 0; i < busca.length; i++){
             if(linearHashTable.search(busca[i])){encontrados++;}
@@ -57,7 +57,7 @@ public class Main {
         encontrados = 0;
 
         //endereçamento aberto (double)
-        HTOpenAddressingDouble doubleHashTable = new HTOpenAddressingDouble(database.length);
+        OpenAddressingDoubleHashTable doubleHashTable = new OpenAddressingDoubleHashTable(database.length);
         for(int i = 0; i < database.length; i++){doubleHashTable.insert(database[i]);}
         for (int i = 0; i < busca.length; i++){
             if(doubleHashTable.search(busca[i])){encontrados++;}
@@ -72,7 +72,7 @@ public class Main {
         encontrados = 0;
 
         //endereçamento aberto (quadratica)
-        HTOpenAddressingQuadraticProbing quadraticHashTable = new HTOpenAddressingQuadraticProbing(database.length);
+        OpenAddressingQuadraticHashTable quadraticHashTable = new OpenAddressingQuadraticHashTable(database.length);
         for(int i = 0; i < database.length; i++){quadraticHashTable.insert(database[i]);}
         for (int i = 0; i < busca.length; i++){
             if(quadraticHashTable.search(busca[i])){encontrados++;}

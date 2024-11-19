@@ -1,12 +1,12 @@
 package hashTable;
 
-public class DoubleHashTableOpenAddressing {
+public class OpenAddressingDoubleHashTable {
     private Integer[] table;
     private int size;
     private int collisions;
     private int rehashCount;
 
-    public DoubleHashTableOpenAddressing(int capacity) {
+    public OpenAddressingDoubleHashTable(int capacity) {
         table = new Integer[capacity];
         size = 0;
         collisions = 0;
