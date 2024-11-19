@@ -1,34 +1,29 @@
 package hashTable;
 
-public class HTOpenAddressingDouble {
+public class LinearHashTableOpenAddressing {
     private Integer[] table;
     private int size;
     private int collisions;
     private int rehashCount;
 
-    public HTOpenAddressingDouble(int capacity) {
+    public LinearHashTableOpenAddressing(int capacity) {
         table = new Integer[capacity];
         size = 0;
         collisions = 0;
         rehashCount = 0;
     }
 
-    private int hash1(int key) {
+    private int hash(int key) {
         return key % table.length;
-    }
-
-    private int hash2(int key) {
-        return 1 + (key % (table.length - 2));
     }
 
     public void insert(int key) {
         if (size >= table.length / 2) {
             rehash();
         }
-        int index = hash1(key);
-        int stepSize = hash2(key);
+        int index = hash(key);
         while (table[index] != null) {
-            index = (index + stepSize) % table.length;
+            index = (index + 1) % table.length;
             collisions++;
         }
         table[index] = key;
@@ -36,13 +31,12 @@ public class HTOpenAddressingDouble {
     }
 
     public boolean search(int key) {
-        int index = hash1(key);
-        int stepSize = hash2(key);
+        int index = hash(key);
         while (table[index] != null) {
             if (table[index].equals(key)) {
                 return true;
             }
-            index = (index + stepSize) % table.length;
+            index = (index + 1) % table.length;
         }
         return false;
     }

@@ -1,46 +1,48 @@
 package hashTable;
 
-public class HTOpenAddressingQuadraticProbing {
+public class DoubleHashTableOpenAddressing {
     private Integer[] table;
     private int size;
     private int collisions;
     private int rehashCount;
 
-    public HTOpenAddressingQuadraticProbing(int capacity) {
+    public DoubleHashTableOpenAddressing(int capacity) {
         table = new Integer[capacity];
         size = 0;
         collisions = 0;
         rehashCount = 0;
     }
 
-    private int hash(int key) {
+    private int hash1(int key) {
         return key % table.length;
+    }
+
+    private int hash2(int key) {
+        return 1 + (key % (table.length - 2));
     }
 
     public void insert(int key) {
         if (size >= table.length / 2) {
             rehash();
         }
-        int index = hash(key);
-        int i = 1;
+        int index = hash1(key);
+        int stepSize = hash2(key);
         while (table[index] != null) {
-            index = (index + i * i) % table.length;
+            index = (index + stepSize) % table.length;
             collisions++;
-            i++;
         }
         table[index] = key;
         size++;
     }
 
     public boolean search(int key) {
-        int index = hash(key);
-        int i = 1;
+        int index = hash1(key);
+        int stepSize = hash2(key);
         while (table[index] != null) {
             if (table[index].equals(key)) {
                 return true;
             }
-            index = (index + i * i) % table.length;
-            i++;
+            index = (index + stepSize) % table.length;
         }
         return false;
     }

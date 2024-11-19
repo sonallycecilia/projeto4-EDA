@@ -1,12 +1,12 @@
 package hashTable;
 
-public class HTOpenAddressingLinearProbing {
+public class QuadraticHashTableOpenAddressing {
     private Integer[] table;
     private int size;
     private int collisions;
     private int rehashCount;
 
-    public HTOpenAddressingLinearProbing(int capacity) {
+    public QuadraticHashTableOpenAddressing(int capacity) {
         table = new Integer[capacity];
         size = 0;
         collisions = 0;
@@ -22,9 +22,11 @@ public class HTOpenAddressingLinearProbing {
             rehash();
         }
         int index = hash(key);
+        int i = 1;
         while (table[index] != null) {
-            index = (index + 1) % table.length;
+            index = (index + i * i) % table.length;
             collisions++;
+            i++;
         }
         table[index] = key;
         size++;
@@ -32,11 +34,13 @@ public class HTOpenAddressingLinearProbing {
 
     public boolean search(int key) {
         int index = hash(key);
+        int i = 1;
         while (table[index] != null) {
             if (table[index].equals(key)) {
                 return true;
             }
-            index = (index + 1) % table.length;
+            index = (index + i * i) % table.length;
+            i++;
         }
         return false;
     }
